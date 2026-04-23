@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LineWatch</title>
+</head>
+<body>
+    <h1>LineWatch</h1>
+
+    <h2>Lisää häiriö</h2>
+
+    <input id="machine" placeholder="Kone">
+    <br><br>
+    <input id="desc" placeholder="Kuvaus">
+    <br><br>
+    <input id="category" placeholder="Kategoria">
+    <br><br>
+
+    <button onclick="addIssue()">Lisää häiriö</button>
+
+    <h2>Häiriöt</h2>
+    <ul id="list"></ul>
+
+    <script>
+        //  Lataa kaikki häiriöt
+        async function load() {
+            const res = await fetch("http://localhost:3000/issues");
+            const data = await res.json();
+
+            const list = document.getElementById("list");
+            list.innerHTML = "";
+
+            data.forEach(i => {
+                const li = document.createElement("li");
+                li.innerText =
+                    i.machine +
+                    " - " +
+                    i.description +
+                    " (" +
+                    i.category +
+                    ")";
+
+                list.appendChild(li);
+            });
+        }
+
+        //  Lisää häiriö
+        async function addIssue() {
+            const machine = document.getElementById("machine").value;
+            const description = document.getElementById("desc").value;
+            const category = document.getElementById("category").value;
+
+            await fetch("http://localhost:3000/issues", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    machine,
+                    description,
+                    category
+                })
+            });
+
+            //  päivitä lista heti
+            load();
+        }
+
+        //  käynnistä sivun lataus
+        load();
+    </script>
+</body>
+</html>
