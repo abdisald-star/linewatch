@@ -18,12 +18,12 @@ LineWatch on yksinkertainen web-sovellus tuotantolinjan häiriöiden seurantaan.
 
 linewatch/
  ├── frontend/
- │    └── index.html
+     └── index.html
  ├── backend/
- │    ├── index.js
- │    ├── package.json
+     └── index.js
+     └── package.json
  ├── data/
- │    └── issues.json
+     └── issues.json
  ├── README.md
 
 ## Käynnistys
