@@ -4,9 +4,10 @@ LineWatch on yksinkertainen web-sovellus tuotantolinjan häiriöiden seurantaan.
 
 ## Ominaisuudet
 
-- Häiriön kirjaaminen (kone, kuvaus, kategoria)
-- Häiriöiden listaus
+- Häiriön lisääminen (kone, kuvaus, kategoria)
 - Häiriön sulkeminen
+- Häiriöiden listaus
+- Status (open / closed)
 
 ## Teknologiat
 
@@ -42,9 +43,10 @@ avaa frontend/index.html selaimessa
 
 ## Käyttö
 
-- Syötä kone, kuvaus ja kategoria
+- Syötä kone,kuvaus ja kategoria
 - Paina "Lisää häiriö"
 - Häiriö näkyy listassa
+- Paina "Sulje" lopettaaksesi häiriön
 
 Sovellus toimii osoitteessa:
 http://localhost:3000
