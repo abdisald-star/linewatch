@@ -5,7 +5,9 @@
     "description": "häiriö",
     "category": "abdi",
     "startTime": "2026-04-23T17:11:03.055Z",
-    "status": "open"
+    "status": "closed",
+    "endTime": "2026-04-24T15:35:50.924Z",
+    "duration": 80687.869
   },
   {
     "id": 1776968569610,
@@ -13,7 +15,9 @@
     "description": "häiriö",
     "category": "abdi",
     "startTime": "2026-04-23T18:22:49.610Z",
-    "status": "open"
+    "status": "closed",
+    "endTime": "2026-04-24T15:35:54.628Z",
+    "duration": 76385.018
   },
   {
     "id": 1776968570823,
@@ -21,7 +25,9 @@
     "description": "häiriö",
     "category": "abdi",
     "startTime": "2026-04-23T18:22:50.823Z",
-    "status": "open"
+    "status": "closed",
+    "endTime": "2026-04-24T15:35:57.131Z",
+    "duration": 76386.308
   },
   {
     "id": 1776970706559,
@@ -29,7 +35,9 @@
     "description": "häiriö",
     "category": "abdi",
     "startTime": "2026-04-23T18:58:26.559Z",
-    "status": "open"
+    "status": "closed",
+    "endTime": "2026-04-24T15:36:03.668Z",
+    "duration": 74257.109
   },
   {
     "id": 1776970715512,
@@ -37,7 +45,9 @@
     "description": "häiriö",
     "category": "abdisalaan",
     "startTime": "2026-04-23T18:58:35.512Z",
-    "status": "open"
+    "status": "closed",
+    "endTime": "2026-04-24T15:42:13.044Z",
+    "duration": 74617.532
   },
   {
     "id": 1777036236873,
@@ -45,6 +55,44 @@
     "description": "häiriö",
     "category": "abdisalaan",
     "startTime": "2026-04-24T13:10:36.873Z",
+    "status": "closed",
+    "endTime": "2026-04-24T15:42:20.234Z",
+    "duration": 9103.361
+  },
+  {
+    "id": 1777044948525,
+    "machine": "testi",
+    "description": "häiriö",
+    "category": "abdisalaan",
+    "startTime": "2026-04-24T15:35:48.525Z",
+    "status": "closed",
+    "endTime": "2026-04-24T15:42:17.402Z",
+    "duration": 388.877
+  },
+  {
+    "id": 1777045343363,
+    "machine": "testi",
+    "description": "häiriö",
+    "category": "abdisalaan",
+    "startTime": "2026-04-24T15:42:23.363Z",
+    "status": "closed",
+    "endTime": "2026-04-24T15:42:24.530Z",
+    "duration": 1.167
+  },
+  {
+    "id": 1777045352509,
+    "machine": "testi",
+    "description": "häiriö",
+    "category": "abdisalaan",
+    "startTime": "2026-04-24T15:42:32.509Z",
+    "status": "open"
+  },
+  {
+    "id": 1777045356219,
+    "machine": "testi",
+    "description": "häiriö",
+    "category": "abdisalaan",
+    "startTime": "2026-04-24T15:42:36.219Z",
     "status": "open"
   }
 ]
