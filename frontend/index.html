@@ -4,69 +4,77 @@
     <title>LineWatch</title>
 </head>
 <body>
-    <h1>LineWatch</h1>
 
-    <h2>Lisää häiriö</h2>
+<h1>LineWatch – Häiriöseuranta</h1>
 
-    <input id="machine" placeholder="Kone">
-    <br><br>
-    <input id="desc" placeholder="Kuvaus">
-    <br><br>
-    <input id="category" placeholder="Kategoria">
-    <br><br>
+<h2>Lisää häiriö</h2>
 
-    <button onclick="addIssue()">Lisää häiriö</button>
+<input id="machine" placeholder="Kone">
+<br><br>
+<input id="desc" placeholder="Kuvaus">
+<br><br>
+<input id="category" placeholder="Kategoria">
+<br><br>
 
-    <h2>Häiriöt</h2>
-    <ul id="list"></ul>
+<button onclick="addIssue()">Lisää häiriö</button>
 
-    <script>
-        //  Lataa kaikki häiriöt
-        async function load() {
-            const res = await fetch("http://localhost:3000/issues");
-            const data = await res.json();
+<h2>Häiriöt</h2>
+<ul id="list"></ul>
 
-            const list = document.getElementById("list");
-            list.innerHTML = "";
+<script>
 
-            data.forEach(i => {
-                const li = document.createElement("li");
-                li.innerText =
-                    i.machine +
-                    " - " +
-                    i.description +
-                    " (" +
-                    i.category +
-                    ")";
+async function load() {
+    const res = await fetch("http://localhost:3000/issues");
+    const data = await res.json();
 
-                list.appendChild(li);
-            });
-        }
+    const list = document.getElementById("list");
+    list.innerHTML = "";
 
-        //  Lisää häiriö
-        async function addIssue() {
-            const machine = document.getElementById("machine").value;
-            const description = document.getElementById("desc").value;
-            const category = document.getElementById("category").value;
+    data.forEach(i => {
+        const li = document.createElement("li");
 
-            await fetch("http://localhost:3000/issues", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    machine,
-                    description,
-                    category
-                })
-            });
+        li.innerHTML = `
+            ${i.machine} - ${i.description} (${i.category})
+            [${i.status}]
+            ${i.duration ? " | kesto: " + i.duration + "s" : ""}
+            ${i.status === "open" ? `<button onclick="closeIssue(${i.id})">Sulje</button>` : ""}
+        `;
 
-            //  päivitä lista heti
-            load();
-        }
+        list.appendChild(li);
+    });
+}
 
-        //  käynnistä sivun lataus
-        load();
-    </script>
+async function addIssue() {
+    const machine = document.getElementById("machine").value;
+    const description = document.getElementById("desc").value;
+    const category = document.getElementById("category").value;
+
+    await fetch("http://localhost:3000/issues", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            machine,
+            description,
+            category
+        })
+    });
+
+    load();
+}
+
+async function closeIssue(id) {
+    await fetch(`http://localhost:3000/issues/${id}`, {
+        method: "PUT"
+    });
+
+    load();
+}
+
+load();
+
+</script>
+
 </body>
 </html>
