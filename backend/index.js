@@ -8,10 +8,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// DATA POLKU
 const DATA_FILE = path.join(__dirname, "..", "data", "issues.json");
 
-// jos tiedostoa ei ole → luodaan
 if (!fs.existsSync(DATA_FILE)) {
     fs.writeFileSync(DATA_FILE, "[]");
 }
@@ -21,58 +19,47 @@ app.get("/", (req, res) => {
     res.send("LineWatch backend toimii!");
 });
 
-// hae kaikki
+// HAETAAN KAIKKI
 app.get("/issues", (req, res) => {
-    try {
-        const data = JSON.parse(fs.readFileSync(DATA_FILE));
-        res.json(data);
-    } catch (err) {
-        res.status(500).json({ error: "Ei voitu lukea dataa" });
-    }
+    const data = JSON.parse(fs.readFileSync(DATA_FILE));
+    res.json(data);
 });
 
-// lisää
+// LISÄÄ HÄIRIÖ
 app.post("/issues", (req, res) => {
-    try {
-        const data = JSON.parse(fs.readFileSync(DATA_FILE));
+    const data = JSON.parse(fs.readFileSync(DATA_FILE));
 
-        const newIssue = {
-            id: Date.now(),
-            machine: req.body.machine,
-            description: req.body.description,
-            category: req.body.category,
-            startTime: new Date(),
-            status: "open"
-        };
+    const newIssue = {
+        id: Date.now(),
+        machine: req.body.machine,
+        description: req.body.description,
+        category: req.body.category,
+        startTime: new Date(),
+        status: "open"
+    };
 
-        data.push(newIssue);
-        fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+    data.push(newIssue);
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 
-        res.json(newIssue);
-    } catch (err) {
-        res.status(500).json({ error: "Tallennus epäonnistui" });
-    }
+    res.json(newIssue);
 });
 
-// sulje
+// SULJE HÄIRIÖ
 app.put("/issues/:id", (req, res) => {
-    try {
-        let data = JSON.parse(fs.readFileSync(DATA_FILE));
+    let data = JSON.parse(fs.readFileSync(DATA_FILE));
 
-        data = data.map(issue => {
-            if (issue.id == req.params.id) {
-                issue.status = "closed";
-                issue.endTime = new Date();
-            }
-            return issue;
-        });
+    data = data.map(issue => {
+        if (issue.id == req.params.id) {
+            issue.status = "closed";
+            issue.endTime = new Date();
+            issue.duration = (new Date(issue.endTime) - new Date(issue.startTime)) / 1000;
+        }
+        return issue;
+    });
 
-        fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 
-        res.json({ message: "Closed" });
-    } catch (err) {
-        res.status(500).json({ error: "Päivitys epäonnistui" });
-    }
+    res.json({ message: "Closed" });
 });
 
 app.listen(3000, () => {
