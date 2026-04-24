@@ -5,8 +5,8 @@ LineWatch on yksinkertainen web-sovellus tuotantolinjan häiriöiden seurantaan.
 ## Ominaisuudet
 
 - Häiriön kirjaaminen (kone, kuvaus, kategoria)
-- Häiriön sulkeminen
 - Häiriöiden listaus
+- Häiriön sulkeminen
 
 ## Teknologiat
 
